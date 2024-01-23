@@ -3,16 +3,18 @@ import { View, Image, Text, TextInput, StyleSheet, ToastAndroid, TouchableOpacit
 import { RoundedButton } from '../../components/RoundedButton';
 import { MyColors } from '../../theme/AppTheme';
 import { useNavigation } from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack'
-import { RootStackParamList } from '../../../App';
-
-
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../../../../App';
+import useHomeViewModel from './HomeViewModel';
+import { CustomTextInput } from '../../components/CustomTextInput';
 
 export const HomeScreen = () => {
+
+    const { email, password, onChange } = useHomeViewModel();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/chef.jpg')} style={styles.imgBackground} />
+            <Image source={require('../../../../assets/chef.jpg')} style={styles.imgBackground} />
             <View style={styles.logoContainer}>
                 {/*
             <Image style={styles.logoImage} source={require('./assets/logo.png')} /> */}
@@ -20,18 +22,30 @@ export const HomeScreen = () => {
             </View>
             <View style={styles.form}>
                 <Text style={styles.font}>Ingresar</Text>
-                <View style={styles.formInput}>
-                    <TextInput style={styles.textInput} keyboardType="email-address" placeholder='Correo eléctronico'></TextInput>
-                    <TextInput style={styles.textInput} placeholder='Contraseña' secureTextEntry={true}></TextInput>
-                </View>
+
+                <CustomTextInput 
+                    placeholder='Correo electronico'
+                    keyboardType='email-address'
+                    property='email'
+                    onChangeText={onChange}
+                    value={email}
+                />
+
+                <CustomTextInput 
+                    placeholder='Contraseña'
+                    keyboardType='default'
+                    property='password'
+                    onChangeText={onChange}
+                    value={password}
+                    secureTextEntry={true}
+                />
 
                 <View style={{ marginTop: 20 }}>
-                    <RoundedButton onPress={() => ToastAndroid.show("Hola", ToastAndroid.SHORT)} text="ENTRAR" />
-                    {/* <Button
-              color='orange'
-              title='ENTRAR'
-              onPress={() => ToastAndroid.show("click", ToastAndroid.SHORT)}
-              /> */}
+                    <RoundedButton onPress={() => {
+                        console.log(email);
+                        console.log(password);
+
+                    }} text="ENTRAR" />
                 </View>
                 <View style={styles.formRegister}>
                     <Text style={{ fontFamily: 'a' }}>¿Aún no tienes cuenta? </Text>

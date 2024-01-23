@@ -2,29 +2,68 @@ import React from 'react'
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
 import { RoundedButton } from '../../components/RoundedButton';
 import { MyColors } from '../../theme/AppTheme';
+import useRegisterViewModel from './RegisterViewModel';
+import { CustomTextInput } from '../../components/CustomTextInput';
 
 export const RegisterScreen = () => {
+    const {name, lastname, email, phone, password, confirPassword, onChange, register } = useRegisterViewModel();
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/chef.jpg')} style={styles.imgBackground} />
+            <Image source={require('../../../../assets/chef.jpg')} style={styles.imgBackground} />
             <View style={styles.logoContainer}>
                 
-            <Image style={styles.logoImage} source={require('../../../assets/user_image.png')} /> 
+            <Image style={styles.logoImage} source={require('../../../../assets/user_image.png')} /> 
                 <Text style={styles.logoText}>SELECCIONE UNA IMAGEN</Text>
             </View>
             <View style={styles.form}>
                 <Text style={styles.font}>Registrate</Text>
-                <View style={styles.formInput}>
-                    <TextInput style={styles.textInput} keyboardType="email-address" placeholder='Nombre(s)'></TextInput>
-                    <TextInput style={styles.textInput} placeholder='Apellido(s)'></TextInput>
-                    <TextInput style={styles.textInput} keyboardType="email-address" placeholder='Correo eléctronico'></TextInput>
-                    <TextInput style={styles.textInput} keyboardType="numeric" placeholder='Teléfono' ></TextInput>
-                    <TextInput style={styles.textInput} placeholder='Contraseña' secureTextEntry={true}></TextInput>
-                    <TextInput style={styles.textInput} placeholder='Confirmar contraseña' secureTextEntry={true}></TextInput>
-                </View>
-
+                <CustomTextInput 
+                    placeholder='Nombre(s)'
+                    keyboardType='default'
+                    property='name'
+                    onChangeText={onChange}
+                    value={name}
+                />
+                <CustomTextInput 
+                    placeholder='Apellido(s)'
+                    keyboardType='default'
+                    property='lastname'
+                    onChangeText={onChange}
+                    value={lastname}
+                />
+                <CustomTextInput 
+                    placeholder='Correo eléctronico'
+                    keyboardType='email-address'
+                    property='email'
+                    onChangeText={onChange}
+                    value={email}
+                />
+                <CustomTextInput 
+                    placeholder='Teléfono'
+                    keyboardType='numeric'
+                    property='phone'
+                    onChangeText={onChange}
+                    value={phone}
+                />
+                <CustomTextInput 
+                    placeholder='Contraseña'
+                    keyboardType='default'
+                    property='password'
+                    onChangeText={onChange}
+                    value={password}
+                    secureTextEntry={true}
+                />
+                <CustomTextInput 
+                    placeholder='Confirmar contraseña'
+                    keyboardType='default'
+                    property='confirPassword'
+                    onChangeText={onChange}
+                    value={confirPassword}
+                    secureTextEntry={true}
+                />
+            
                 <View style={{ marginTop: 15 }}>
-                    <RoundedButton onPress={() => ToastAndroid.show("Hola", ToastAndroid.SHORT)} text="CONFIRMAR" />
+                    <RoundedButton onPress={() => register()} text="REGISTRAR" />
                 </View>
             </View>
         </View>
