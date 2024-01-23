@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         height: 50,
         backgroundColor: "#fff",
-        fontFamily: 'a'
+        fontFamily: 'Montserrat'
     },
 
     formInput: {

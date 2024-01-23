@@ -14,7 +14,7 @@ export type RootStackParamList = {
 
 async function loadFonts() {
     await Font.loadAsync({
-      'a': require('./assets/font/Montserrat.ttf'),
+      'Montserrat': require('./assets/font/Montserrat.ttf'),
     });
 }
 
